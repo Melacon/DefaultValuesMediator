@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <arp xmlns="http://netconfcentral.org/ns/yuma-arp">
+  </arp>
+  <nacm xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-acm">
+  </nacm>
+   <MW_AirInterface_Pac xmlns="uri:onf:MicrowaveModel-ObjectClasses-AirInterface">
+      <layerProtocol>LP-MWPS-ifIndex1</layerProtocol>
+   </MW_AirInterface_Pac>
+   <MW_AirInterface_Pac xmlns="uri:onf:MicrowaveModel-ObjectClasses-AirInterface">
+      <layerProtocol>LP-MWPS-ifIndex2</layerProtocol>
+   </MW_AirInterface_Pac>
+
+</config>

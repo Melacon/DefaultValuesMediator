@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config xmlns="urn:ietf:params:xml:ns:netconf:base:1.0">
+  <arp xmlns="http://netconfcentral.org/ns/yuma-arp">
+  </arp>
+  <nacm xmlns="urn:ietf:params:xml:ns:yang:ietf-netconf-acm">
+  </nacm>
+  <MW_AirInterface_Pac xmlns="uri:onf:MicrowaveModel-ObjectClasses-AirInterface">
+    <layerProtocol>LP-MWPS-ifIndex1</layerProtocol>
+    <airInterfaceConfiguration>
+      <airInterfaceName>if1</airInterfaceName>
+      <radioSignalID>11</radioSignalID>
+      <problemKindSeverityList>
+        <problemKindName>modemIsFaulty</problemKindName>
+        <problemKindSeverity>major</problemKindSeverity>
+      </problemKindSeverityList>
+      <problemKindSeverityList>
+        <problemKindName>modulationIsDownShifted</problemKindName>
+        <problemKindSeverity>warning</problemKindSeverity>
+      </problemKindSeverityList>
+      <problemKindSeverityList>
+        <problemKindName>radioIsFaulty</problemKindName>
+        <problemKindSeverity>major</problemKindSeverity>
+      </problemKindSeverityList>
+      <problemKindSeverityList>
+        <problemKindName>rslIsExceeded</problemKindName>
+        <problemKindSeverity>major</problemKindSeverity>
+      </problemKindSeverityList>
+      <problemKindSeverityList>
+        <problemKindName>signalIsLost</problemKindName>
+        <problemKindSeverity>critical</problemKindSeverity>
+      </problemKindSeverityList>
+      <problemKindSeverityList>
+        <problemKindName>temperatureIsExceeded</problemKindName>
+        <problemKindSeverity>major</problemKindSeverity>
+      </problemKindSeverityList>
+    </airInterfaceConfiguration>
+  </MW_AirInterface_Pac>
+  <NetworkElement xmlns="uri:onf:CoreModel-CoreNetworkModule-ObjectClasses">
+    <uuid>Ceragon-12</uuid>
+    <nameList>
+      <valueName>neName</valueName>
+      <value>Ceragon-12</value>
+    </nameList>
+    <labelList>
+      <valueName>neLabel</valueName>
+      <value>Ceragon-12</value>
+    </labelList>
+    <extensionList>
+      <valueName>additionalValue</valueName>
+      <value>additionalValue</value>
+    </extensionList>
+    <localIdList>
+      <valueName>vName</valueName>
+      <value>MW_elem_1</value>
+    </localIdList>
+    <_ltpRefList>
+      <uuid>LTP-MWPS-ifIndex1</uuid>
+      <_lpList>
+        <uuid>LP-MWPS-ifIndex1</uuid>
+      </_lpList>
+    </_ltpRefList>
+  </NetworkElement>
+</config>

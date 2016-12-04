@@ -1,0 +1,1 @@
+netconfd --log-level=debug --access-control=off --target=running --startup=DVM_startup_datastore.xml --module=MicrowaveModel-ObjectClasses-AirInterface --module=CoreModel-CoreNetworkModule-ObjectClasses

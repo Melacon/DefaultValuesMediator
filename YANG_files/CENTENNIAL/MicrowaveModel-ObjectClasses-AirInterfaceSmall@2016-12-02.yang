@@ -1,0 +1,136 @@
+module MicrowaveModel-ObjectClasses-AirInterfaceSmall {
+    namespace "uri:onf:MicrowaveModel-ObjectClasses-AirInterfaceSmall";
+    prefix MicrowaveModel-ObjectClasses-AirInterfaceSmall;
+
+    import CoreModel-CoreNetworkModule-ObjectClasses {
+        prefix CoreModel-CoreNetworkModule-ObjectClasses;
+    }
+    import MicrowaveModel-TypeDefinitionsSmall {
+        prefix MicrowaveModel-TypeDefinitionsSmall;
+    }
+    import CoreModel-CoreFoundationModule-TypeDefinitions {
+        prefix CoreModel-CoreFoundationModule-TypeDefinitions;
+    }
+    import CoreModel-CoreFoundationModule-SuperClassesAndCommonPackages {
+        prefix CoreModel-CoreFoundationModule-SuperClassesAndCommonPackages;
+    }
+
+    organization 
+        'ONF (Open Networking Foundation) Open Transport Working Group - Wireless Transport Project';
+
+    contact 
+        'WG Web:   <https://www.opennetworking.org/technical-communities/areas/specification/1931-optical-transport>
+         WG List:  <mailto:wireless-transport@login.opennetworking.org >
+         WG Chair: Lyndon Ong
+                   <mailto:lyong@ciena.com>
+         WG Chair: Giorgio Cazzaniga
+                   <mailto:giorgio.cazzaniga@sm-optics.com>';
+
+    description 
+        'This module contains a collection of YANG definitions for 
+         managing microwave transport networks.';
+
+    revision 2016-12-02 {
+        description 
+            "Initial revision."; 
+        reference 
+            "ONF TR xyz: A YANG Data Model for Microwave Transport Networks."; 
+    }
+
+    list MW_AirInterface_Pac {
+        description "LTP(MWPS-TTP)";
+        key 'layerProtocol';
+        config true;
+        leaf layerProtocol {
+            type leafref {
+                path '/CoreModel-CoreNetworkModule-ObjectClasses:NetworkElement/CoreModel-CoreNetworkModule-ObjectClasses:_ltpRefList/CoreModel-CoreNetworkModule-ObjectClasses:_lpList/CoreModel-CoreNetworkModule-ObjectClasses:uuid';
+            }
+            description "CoreModel-CoreNetworkModule-ObjectClasses:NetworkElement/_ltpRefList/_lpList/uuid";
+        }
+        container airInterfaceCapability {
+            config false;
+            uses AirInterfaceCapability;
+        }
+        container airInterfaceConfiguration {
+            config true;
+            uses AirInterfaceConfiguration;
+        }
+        container airInterfaceStatus {
+            config false;
+            uses AirInterfaceStatus;
+        }
+        container airInterfaceCurrentProblems {
+            config false;
+            uses AirInterfaceCurrentProblems;
+        }
+    }
+    grouping AirInterfaceCapability {
+        description "Describes the 'analog' capabilities of modem and transmitter of the microwave device. Value ranges of attributes are not independently (e.g. min. and max. transmit power depends on modulation). Legal combinations of values are expressed in transmissionModeTypes.";
+        leaf typeOfEquipment {
+            type string;
+            config false;
+            description "This parameter indicates the equipment type. Instead of uploading the complete set of capabilities, capabilities of the same equipment type could be reused. Should be unique for a combination of modem, radio and their respective firmware.";
+            default "Type of equipment not yet defined.";
+        }
+        leaf txFrequencyMin {
+            type int32;
+            config false;
+            description "Value of the minimum transmit frequency tunable at the air interface.";
+            units "kHz";
+            default -1;
+        }
+        list supportedChannelPlanList {
+            description "List of channel spacing that are supported by the device.";
+            key 'supportedChannelPlan';
+            ordered-by system;
+            uses MicrowaveModel-TypeDefinitionsSmall:channelPlanType;
+            min-elements 1;
+        }
+    }
+    grouping AirInterfaceConfiguration {
+        description "Configuration of the radio link.";
+        leaf airInterfaceName {
+            type string;
+            description "Operator specific microwave link ID (often used for coding area, type of element and sequential number).";
+            default "Air interface ID not yet defined.";
+        }
+        leaf radioSignalID {
+            type string;
+            description "The radioSignalId is transmitted on the air interface so the remote site of the link synchronizes on the correct transmitter. The local radio MUST NOT synchronize on a radio signal with a different radioSignalId. The link ID is neither an ID necessary to span the model nor an ID referencing external data. It is just some sort of name of the link transmitted so the correct remote site can be identified in an interference situation.
+                The value zero might be used to make the microwave to disable the link ID check.";
+            default "Radio signal ID not yet defined.";
+        }
+        list problemKindSeverityList {
+            description "Severity of the problem to be configured.";
+            key 'problemKindName';
+            config true;
+            ordered-by system;
+            uses MicrowaveModel-TypeDefinitionsSmall:airInterfaceProblemSeverityType;
+            min-elements 6;
+        }
+    }
+    grouping AirInterfaceStatus {
+        description "Measurements of current values on the air interface and operational status of the device.";
+        leaf txFrequencyCur {
+            type int32;
+            config false;
+            description "Center frequency of the currently operated transmit channel.";
+            units "kHz";
+            default -1;
+        }
+        leaf rxFrequencyCur {
+            type int32;
+            config false;
+            description "Center frequency of the currently operated receive channel.";
+            units "kHz";
+            default -1;
+        }
+    }
+    grouping AirInterfaceCurrentProblems {
+        list currentProblemList {
+            key 'sequenceNumber';
+            ordered-by system;
+            uses MicrowaveModel-TypeDefinitionsSmall:airInterfaceCurrentProblemType;
+        }
+    }
+}
